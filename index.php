@@ -1,4 +1,3 @@
 <?php
-	echo '<p>Hello COVID-19 World</p>';
+	echo'<p>Hello COVID-19 World</p>';
 ?>
-
