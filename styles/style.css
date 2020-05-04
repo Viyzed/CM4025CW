@@ -49,6 +49,17 @@ form {
 	border: 1px solid gray;
 }
 
+#error {
+	width: 92%;
+	margin: 0px auto;
+	padding: 10pc;
+	border: 1px solid #a94442;
+	color: #a94442;
+	background: #f2dede;
+	border-radius: 5px;
+	text-align: left;
+}
+
 #btn {
 	padding: 10px;
 	font-size: 15px;

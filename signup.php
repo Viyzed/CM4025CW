@@ -17,7 +17,7 @@
 		<?php include('errors.php'); ?>
 		<div id="user-input">
 			<label>Username</label>
-			<input type="text" name="username">
+			<input type="text" name="username" value="<?php echo $username; ?>">
 		</div>
 		<div id="user-input">
                         <label>Password</label>
