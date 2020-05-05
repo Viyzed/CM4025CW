@@ -3,6 +3,7 @@
 <!doctype html>
 <html>
 <head>
+	<title>My List</title>
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 
