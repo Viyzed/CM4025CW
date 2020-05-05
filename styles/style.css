@@ -20,6 +20,36 @@ body {
 	padding: 20px;
 }
 
+#title {
+	color: white;
+	letter-spacing: 1px;
+	font-size: 30px;
+}
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 8vh;
+	background: #5F9EA0;		
+}
+
+nav ul {
+	display: flex;
+	justify-content: space-around;
+	width: 20%;
+}
+
+nav ul li {
+	list-style: none;
+}
+
+nav ul li a {
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+
 form {
 	text-align: center;
 	width: 30%;
@@ -28,6 +58,15 @@ form {
 	border: 1px solid #B0C4DE;
 	background: white;
 	border-radius: 0px 0px 10px 10px;
+}
+
+#user-search {
+	text-align: center; 
+	margin: auto;
+}
+
+#film-search {
+	border: none;	
 }
 
 #user-input {
@@ -49,10 +88,16 @@ form {
 	border: 1px solid gray;
 }
 
+#session {
+	text-align: center;
+	margin: 0px auto;
+	padding: 10px;
+}
+
 #error {
 	width: 92%;
 	margin: 0px auto;
-	padding: 10pc;
+	padding: 10px;
 	border: 1px solid #a94442;
 	color: #a94442;
 	background: #f2dede;
@@ -70,3 +115,9 @@ form {
 	
 }
 
+#success {
+	color: #3C763D;
+	background: #DFF0D8;
+	border: 3px solid #3C763D;
+	margin-bottom: 20px;
+}
