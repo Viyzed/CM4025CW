@@ -14,6 +14,7 @@
                 <ul>
                         <li><a href="index.php">Home</a></li>
                         <li><a href="list.php">My List</a></li>
+			<li><a href="about.php">About</a></li>
                         <li><a href="signup.php">Sign Up</a></li>
                 </ul>
         </nav>
