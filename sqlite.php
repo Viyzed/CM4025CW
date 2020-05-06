@@ -6,7 +6,8 @@
 	
 	//open sqlite Db
 	try {
-		$db = new PDO('sqlite:db/registration.sqlite');
+		$db = new SQLite3('db/registration.sqlite');
+		$db->exec('CREATE TABLE IF NOT EXISTS users (id INTEGER NOT NULL PRIMARY KEY, username varchar(50), password varchar(255))');
 	} catch(PDOException $e) {
 		echo $e->getMessage();
 	}
@@ -28,13 +29,11 @@
 			array_push($errors, "Passwords do not match.");
 		} 
 		
-		# Error here
 		//add the user to the Db
 		if(count($errors) == 0) {
 			//encrypt the password with md5 hash
 			$password_hash = md5($password);
-			$query = "INSERT INTO users(username, password) VALUES('$username', '$password_hash');";
-			$db->exec($query);
+			$db->exec("INSERT INTO users(id, username, password) VALUES(11, '$username', '$password_hash')");
 			$_SESSION['username'] = $username;
 			$_SESSION['success'] = ("You are logged in as: ");
 			header('location: index.php'); //redirect to the home page
@@ -76,7 +75,6 @@
 	if(isset($_GET['logout'])) {
 		session_destroy();
 		unset($_SESSION['username']);
-		header('location: index.php');
 	}
 
 ?>

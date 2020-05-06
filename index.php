@@ -1,6 +1,14 @@
 <?php
 include('sqlite.php');
 include('search.php');
+include('store.php');
+$add = false;
+global $omdb_array;
+if(isset($_POST['bntAdd'])) {
+	$add = true;
+} elseif(isset($_POST['btnSearch'])) {
+	$add = false;
+}
 ?>
 
 <!doctype html>
@@ -17,9 +25,9 @@ include('search.php');
 		</div>
 		<ul>
 			<li><a href="#">Home</a></li>
-			<li><a href="list.php">My List</a></li>
+			<li><a href="list.php">MyList</a></li>
 			<li><a href="about.php">About</a></li>
-			<li><a href="signup.php">Sign Up</a></li>
+			<li><a href="signup.php">SignUp</a></li>
 		</ul>
 	</nav>
 
@@ -42,18 +50,15 @@ include('search.php');
 
 	</div>
 
-	<div id=scroll-pane"> </div>
-		
-	<div id="user-search">
+	<div id="user-search">	
+		<h2 id="instruct">Enter the title of a film and Search.</h2>
 		<form id=film-search>
-			<input type="text" name="search"/>
-			<button type="submit">Search</button>
-			<button type"submit" name="add">Add to My List</button>
+			<input id="txt" type="text" name="search"/>
+			<button id="btn" type="submit" name="btnSearch">Search</button>
+			<button id="btn" type="submit" name="btnAdd">Add to My List</button>
 		</form>
-	
-		<img src=<?php echo $poster_url ?> alt=<?php echo($omdb_array['Title']); ?>/>
+	        <object data=<?php echo $poster_url ?> type="image/jpg"></object>
 	</div>
-
 </body>
 </html>
 
