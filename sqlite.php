@@ -37,7 +37,7 @@
 		if(count($errors) == 0) {
 			//encrypt the password with md5 hash
 			$password_hash = md5($password);
-			$query = "INSERT INTO users(id, username, password) VALUES(11, '$username', '$password_hash')";
+			$query = "INSERT INTO users(username, password) VALUES('$username', '$password_hash')";
 			$db->exec($query);
 			$_SESSION['username'] = $username;
 			$_SESSION['success'] = ("You are logged in as: ");
@@ -65,13 +65,16 @@
 			$password_hash = md5($password); //encrypt password
 			$query = "SELECT * FROM users WHERE username='$username' AND password='$password_hash'";
                         $output = $db->query($query);
-			$rows = $output->fetchArray();
-			$numRows = count($rows);
+			$numRows = 0;
+			$row = $output->fetchArray();
+			$numRows = count($row);
 			if($numRows > 0) {
 				//sing user in
                         	$_SESSION['username'] = $username;
                         	$_SESSION['success'] = ("You are logged in as: ");
                         	header('location: index.php'); //redirect to the home page
+				$_SESSION['success'] = ("The number of rows " . $numRows . "The rows " . $rows);
+				
 			} else {
 				array_push($errors, "The username/password is incorrect.");
 			}
