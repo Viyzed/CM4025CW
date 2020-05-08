@@ -8,7 +8,6 @@
 	//open sqlite Db
 	try {
 		$db = new SQLite3('db/registration.sqlite');
-		$db->exec('CREATE TABLE IF NOT EXISTS users (id INTEGER NOT NULL PRIMARY KEY, username varchar(50), password varchar(255))');
 	} catch(PDOException $e) {
 		echo $e->getMessage();
 	}
@@ -64,17 +63,12 @@
 		if(count($errors) == 0) {
 			$password_hash = md5($password); //encrypt password
 			$query = "SELECT * FROM users WHERE username='$username' AND password='$password_hash'";
-                        $output = $db->query($query);
-			$numRows = 0;
-			$row = $output->fetchArray();
-			$numRows = count($row);
-			if($numRows > 0) {
+                        $count = $db->querySingle($query);
+			if($count > 0) {
 				//sing user in
                         	$_SESSION['username'] = $username;
                         	$_SESSION['success'] = ("You are logged in as: ");
                         	header('location: index.php'); //redirect to the home page
-				$_SESSION['success'] = ("The number of rows " . $numRows . "The rows " . $rows);
-				
 			} else {
 				array_push($errors, "The username/password is incorrect.");
 			}
