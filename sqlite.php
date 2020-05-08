@@ -64,11 +64,10 @@
 		if(count($errors) == 0) {
 			$password_hash = md5($password); //encrypt password
 			$query = "SELECT * FROM users WHERE username='$username' AND password='$password_hash'";
-                        $output = $db->exec($query);
-			#$rows = $output->query("SELECT COUNT(*) as count FROM users");
-			#$row = $rows->fetchArray();
-			#$numRows = $row['count'];
-			if(1 == 1) {
+                        $output = $db->query($query);
+			$rows = $output->fetchArray();
+			$numRows = count($rows);
+			if($numRows > 0) {
 				//sing user in
                         	$_SESSION['username'] = $username;
                         	$_SESSION['success'] = ("You are logged in as: ");
@@ -83,6 +82,7 @@
 	if(isset($_GET['logout'])) {
 		session_destroy();
 		unset($_SESSION['username']);
+		header('location: index.php');
 	}
 
 ?>
