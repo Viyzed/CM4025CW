@@ -3,6 +3,7 @@
 	
 	$errors = array();
 	$username = "";
+	$query = "";
 	
 	//open sqlite Db
 	try {
@@ -27,13 +28,17 @@
                 }
 		if($password != $password_confirm) {
 			array_push($errors, "Passwords do not match.");
-		} 
+		}
+
+		//sanitise username variable
+		$username = filter_var($username, FILTER_SANITIZE_STRING); 
 		
 		//add the user to the Db
 		if(count($errors) == 0) {
 			//encrypt the password with md5 hash
 			$password_hash = md5($password);
-			$db->exec("INSERT INTO users(id, username, password) VALUES(11, '$username', '$password_hash')");
+			$query = "INSERT INTO users(id, username, password) VALUES(11, '$username', '$password_hash')";
+			$db->exec($query);
 			$_SESSION['username'] = $username;
 			$_SESSION['success'] = ("You are logged in as: ");
 			header('location: index.php'); //redirect to the home page
@@ -52,6 +57,9 @@
                 if(empty($password)) {
 			array_push($errors, "Password box is empty.");
                 }            
+
+		//sanitise username variable
+                $username = filter_var($username, FILTER_SANITIZE_STRING);
 		
 		if(count($errors) == 0) {
 			$password_hash = md5($password); //encrypt password
