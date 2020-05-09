@@ -54,6 +54,36 @@ nav ul li a:hover {
 	color: #5EA7D5;
 }
 
+/* My List Styles */
+#list {
+	text-align: center;
+	margin: auto;
+        width: 40%;
+        padding: 20px;
+        border: 1px solid #B0C4DE;
+        border-radius: 10px 10px 10px 10px;
+}
+
+ol {
+	display: flex;
+	flex-direction: column;
+}
+
+ol li {
+	flex-direction: row;
+	list-style: none;
+}
+
+ol li #desc {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+ol li a {
+	text-decoration: none;
+}
+
 #instruct {
 	color: black;
 }
@@ -78,12 +108,22 @@ form {
 	border-radius: 10px 10px 10px 10px;
 }
 
-#user-search {
+#index-container {
 	text-align: center; 
 	margin: auto;
 }
 
+#user-search {
+	margin-bottom: 10px;	
+}
+
 #film-search {
+	border: none;
+	text-align: center;
+        margin: auto;
+}
+
+#film-add {
 	border: none;
 }
 
@@ -143,3 +183,5 @@ form {
 	border: 3px solid #3C763D;
 	margin-bottom: 20px;
 }
+
+

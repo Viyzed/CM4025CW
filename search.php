@@ -1,13 +1,15 @@
 <?php 
 
+/*include("sqlite.php");*/
+
 $api_key = "&apikey=ec5edf38";
-$imdbId = "";
+$imdbId;
+$userId = 0;
 $poster_height = "&h=600";
 $poster_url = "";
 $omdb_array = array();
-global $add;
 
-if(!empty($_GET['search']) && $add==false) {
+if(!empty($_GET['search'])) {
 		$omdb_api = "http://www.omdbapi.com/?t=";
 		$poster_api = "http://img.omdbapi.com/?i=";
 
@@ -18,9 +20,16 @@ if(!empty($_GET['search']) && $add==false) {
 		$omdb_array = json_decode($omdb_json, true);
 	
 		$imdbId = $omdb_array['imdbID'];
-	
+		$_SESSION['imdbId'] = $imdbId;
 	
 		$poster_url = $poster_api . $imdbId . $poster_height . $api_key;
+} elseif(empty($_GET['search'])) {
+		$username = $_SESSION['username'];
+		$userId = $db->querySingle("SELECT id FROM users WHERE username ='$username' LIMIT 1");
+		$imdbId = $_SESSION['imdbId'];
+		$query = "INSERT INTO lists(id, imdb_id) VALUES('$userId', '$imdbId')";
+	        $db->exec($query);
+		
 }
 
 ?>

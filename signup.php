@@ -17,7 +17,7 @@
                         <li><a href="index.php">Home</a></li>
                         <li><a href="list.php">MyList</a></li>
 			<li><a href="about.php">About</a></li>
-                        <li><a href="signup.php">SignUp</a></li>
+                        <li><a href="#">SignUp</a></li>
                 </ul>
         </nav>
 

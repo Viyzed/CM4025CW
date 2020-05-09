@@ -1,14 +1,7 @@
 <?php
 include('sqlite.php');
 include('search.php');
-include('store.php');
-$add = false;
 global $omdb_array;
-if(isset($_POST['bntAdd'])) {
-	$add = true;
-} elseif(isset($_POST['btnSearch'])) {
-	$add = false;
-}
 ?>
 
 <!doctype html>
@@ -50,14 +43,18 @@ if(isset($_POST['bntAdd'])) {
 
 	</div>
 
-	<div id="user-search">	
-		<h2 id="instruct">Enter the title of a film and Search.</h2>
-		<form id=film-search>
-			<input id="txt" type="text" name="search"/>
-			<button id="btn" type="submit" name="btnSearch">Search</button>
-			<button id="btn" type="submit" name="btnAdd">Add to My List</button>
-		</form>
-	        <object data=<?php echo $poster_url ?> type="image/jpg"></object>
+	<div id="index-container">
+		<div id="user-search">	
+			<h2 id="instruct">Enter the title of a film and Search.</h2>
+			<form id=film-search>
+				<input id="txt" type="text" name="search"/>
+				<button id="btn" type="submit" name="btnSearch">Search</button>
+			</form>
+			<form id="film-add">
+				<button id="btn" type="submit" name="btnAdd">Add to My List</button>
+			</form>
+		</div>
+		<object data=<?php echo $poster_url ?> type="image/jpg"></object>
 	</div>
 </body>
 </html>
