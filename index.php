@@ -11,7 +11,8 @@ global $omdb_array;
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 
-<body> 
+<body>
+	<!-- Navigation Pane --> 
 	<nav>
 		<div id="title">
 			<h4>CineBucket List</h4>
@@ -24,6 +25,7 @@ global $omdb_array;
 		</ul>
 	</nav>
 
+	<!-- User session (username and logout button) -->
 	<div id="session">
 		<?php if(isset($_SESSION['success'])): ?>
 			<div id="error success">
@@ -43,6 +45,7 @@ global $omdb_array;
 
 	</div>
 
+	<!-- Search film by title to get poster and add to list table of database  -->
 	<div id="index-container">
 		<div id="user-search">	
 			<h2 id="instruct">Enter the title of a film and Search.</h2>

@@ -9,6 +9,7 @@
 
 <body>
         <nav>
+		<!-- Navigation Pane -->
                 <div id="title">
                         <h4>CineBucket List</h4>
                 </div>
@@ -19,7 +20,8 @@
                         <li><a href="signup.php">SignUp</a></li>
                 </ul>
         </nav>
-
+	
+	<!-- About Page Text -->
 	<div id="container">
 		<h1 id="about-title">About thie Website</h1>
 		<br><hr>

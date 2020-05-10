@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<!-- Navigation Pane -->
 	<nav>
                 <div id="title">
                         <h4>CineBucket List</h4>
@@ -23,7 +24,8 @@
         <div id="header">
                 <h2>Sign In</h2>
         </div>
-
+	
+	<!-- Take user input for singing into an already existing account -->
         <form method="post" action="signin.php">
 		<?php include('errors.php')?>
                 <div id="user-input">

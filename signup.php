@@ -8,7 +8,8 @@
 </head>
 
 <body>
-
+	
+	<!-- Navigation Pane -->
 	<nav>
                 <div id="title">
                         <h4>CineBucket List</h4>
@@ -24,7 +25,8 @@
 	<div id="header">
 		<h2>Sign Up</h2>
 	</div>
-
+	
+	<!-- take user unput for creating a new account -->
 	<form method="post" action="signup.php">
 		<!-- handle form errors -->
 		<?php include('errors.php'); ?>

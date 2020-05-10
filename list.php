@@ -7,15 +7,10 @@ if(empty($_SESSION['username'])) {
 	header('location: signup.php');
 }
 
-try {
-	$db = new SQLite3('db/registration.sqlite');
-} catch(PDOException $e) {
-	echo $e->getMessage();
-}
-
 //Clean up lists table with NULL entires
 $db->exec("DELETE FROM lists WHERE id IS NULL OR id = '' OR imdb_id IS NULL OR imdb_id = ''");
 
+//Array variables to store results from the database and get API responses and parse them to PHP Array objects
 $result = array();
 $apiUrls =  array();
 $api_json = array();
@@ -23,15 +18,16 @@ $api_array = array();
 
 $username = $_SESSION['username'];
 
+//Get the user's ID in the users table of the database
 $query = ("SELECT id FROM users WHERE username='".$username."' LIMIT 1");
 $userId = $db->query($query);
 $userId = $userId->fetchArray(SQLITE3_ASSOC)["id"];
 
-
+//Get the IDs of the films the current user has stored in the lists table of the database
 $imdbIds = $db->query("SELECT imdb_id FROM lists WHERE id='".$userId."'");
 $imdbArray = array();
-$i = 0;
 
+$i = 0;
 while($row = $imdbIds->fetchArray(SQLITE3_ASSOC)) {
 	if(!isset($row['imdb_id'])) continue;
 
@@ -40,7 +36,7 @@ while($row = $imdbIds->fetchArray(SQLITE3_ASSOC)) {
 	$i++;
 }
 
-
+//Use the film IDs to craft API calls to get the film posters and JSON data on the film
 $j = 0;
 foreach($imdbArray as $element) {
 	if($element['imdb_id'] == null) {
@@ -52,9 +48,9 @@ foreach($imdbArray as $element) {
 	$j++;
 }
 
+//Parse the API JSON response to an Array
 $result = array_unique($result);
 $apiUrls = array_unique($apiUrls);
-
 $l = 0;
 foreach($apiUrls as $url) {
 	$api_json[$l] = file_get_contents($url);
@@ -62,10 +58,11 @@ foreach($apiUrls as $url) {
 	$l++;
 }
 
-$linkchoice;
+//Remove the selected film from the databse if the remove button is clicked for the selected film
 if(isset($_GET['remove'])) {
-	$linkchoice = $_GET['remove'];
-	$db->exec("DELETE FROM lists WHERE id = '".$userId."' AND imdb_id = '".$linkchoice."'");
+        $linkchoice = $_GET['remove'];
+        $db->exec("DELETE FROM lists WHERE id = '".$userId."' AND imdb_id = '".$linkchoice."'");
+        header("Location: list.php");
 }
 
 ?>
@@ -78,7 +75,7 @@ if(isset($_GET['remove'])) {
 </head>
 
 <body>
-
+	<!-- Navigation Pane -->
 	<nav>
                 <div id="title">
                         <h4>My List</h4>
@@ -90,7 +87,8 @@ if(isset($_GET['remove'])) {
                         <li><a href="signup.php">SignUp</a></li>
                 </ul>
         </nav>
-
+	
+	<!-- User Session (username and logout button) -->
 	<div id="session">
                 <?php if(isset($_SESSION['success'])): ?>
                         <div id="error success">
@@ -109,7 +107,9 @@ if(isset($_GET['remove'])) {
                 <?php endif ?>
         </div>
 
+	<!-- list container (gets user's films from the database and displays the posters as well as information) -->
 	<div id="list">
+		<!-- php included to loop through the array of films retrieved from the database and add them to the html list -->
 		<ol> <?php $index = 0;
 			foreach($result as $url) {
 				?><li> <div id="desc">
